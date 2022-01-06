@@ -7,7 +7,7 @@ este é um projeto de chat real time usando nodaJs, mongoDB, socket-io e outra t
 Baixe o source, clone, adapte, use e melhore como quiser. 
 
 
-feito com |`:sparkling_heart:`| por um dev para outros devs
+feito com carinho por um dev para outros devs
 
 
 ## Variáveis de Ambiente
