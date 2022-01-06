@@ -1,0 +1,57 @@
+const express = require("express");
+const app = express();
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+const helmet = require("helmet");
+const morgan = require("morgan");
+const multer = require("multer");
+const cors = require("cors")
+const userRoute = require("./routes/users");
+const authRoute = require("./routes/auth");
+const conversationRoute = require("./routes/conversations");
+const messageRoute = require("./routes/messages");
+const router = express.Router();
+const path = require("path");
+const port = 3333
+dotenv.config();
+
+mongoose.connect(
+  process.env.MONGO_URL,
+  { useNewUrlParser: true, useUnifiedTopology: true },
+  () => {
+    console.log("Connected to MongoDB");
+  }
+);
+app.use("/images", express.static(path.join(__dirname, "public/images")));
+
+//middleware
+app.use(express.json());
+app.use(helmet());
+app.use(morgan("dev"));
+app.use(cors())
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "public/images");
+  },
+  filename: (req, file, cb) => {
+    cb(null, req.body.name);
+  },
+});
+
+const upload = multer({ storage: storage });
+app.post("/api/upload", upload.single("file"), (req, res) => {
+  try {
+    return res.status(200).json("File uploded successfully");
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+app.use("/api/auth", authRoute);//ok
+app.use("/api/users", userRoute);//ok
+app.use("/api/conversations", conversationRoute);//ok
+app.use("/api/messages", messageRoute);
+
+app.listen(port, () => {
+  console.log(`Server runnig on port ${port}`);
+});

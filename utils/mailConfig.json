@@ -1,0 +1,9 @@
+{
+  "from":"pereira.matheusalves@gmail.com",
+  "host": "smtp.mailtrap.io",
+  "port": 2525,
+  "auth": {
+    "user": "87212018a29dde",
+    "pass": "f47635078d5200"
+  }
+}
