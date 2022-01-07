@@ -69,7 +69,7 @@ use `token: acessToken` nos headers das requisições.
 ### RESETAR UMA SENHA
 
 ```http
-  PUT /api/auth/login
+  PUT /api/auth/reset-password
 ```
 | Parâmetro   | Tipo       | Descrição  |                           |
 | :---------- | :--------- | :--------- |:---------
